@@ -1,4 +1,4 @@
-import {Schema} from "mongoose";
+import {mongoose, Schema } from "mongoose";
 
 const userSchema = new Schema(
     {
@@ -15,10 +15,10 @@ const userSchema = new Schema(
             type: String,
             required: true
         },
-        token: {type: String}
+        token: { type: String }
     }
 )
 
 const User = mongoose.model("User", userSchema);
 
-export {User};
+export { User };
