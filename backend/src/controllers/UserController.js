@@ -18,12 +18,16 @@ const login = async (req, res) => {
             return res.status(httpStatus.NOT_FOUND).json({ message: "User Not Found" });
         }
 
-        if (bcrypt.compare(password, user.password)) {
+        let isPasswordCorrect = await bcrypt.compare(password, user.password);
+
+        if (isPasswordCorrect) {
             let token = crypto.randomBytes(20).toString("hex");
 
             user.token = token;
             await user.save();
             return res.status(httpStatus.OK).json({ token: token });
+        } else {
+            return res.status(httpStatus.UNAUTHORIZED).json({message: "Invalid Username Password"});
         }
 
     } catch (e) {
@@ -52,7 +56,7 @@ const register = async (req, res) => {
 
         res.status(httpStatus.CREATED).json({ message: "User Registered" });
 
-    } catch (er) {
+    } catch (e) {
         res.json({ message: `Something went wrong ${e}` });
     }
 }
