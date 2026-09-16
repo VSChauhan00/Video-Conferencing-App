@@ -1,0 +1,12 @@
+.local-video-container {
+    margin-top: 1rem;
+}
+
+.local-video {
+    width: 100%;
+    max-width: 640px;
+    min-height: 240px;
+    background: #000;
+    border-radius: 8px;
+    display: block;
+}
