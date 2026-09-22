@@ -4,12 +4,12 @@
     background-color: black;
 }
 
-.meetVideoContainer > .meetUserVideo {
+.meetUserVideo {
     position: absolute;
     bottom: 10vh;
     height: 20vh;
     width: auto;
-    right: 0;
+    left: 0;
     border-radius: 20px;
 
 }
@@ -36,4 +36,25 @@
     height: 20vh;
     min-width: 30vw;
     border-radius: 10px;
+}
+
+.chatRoom {
+    position: absolute;
+    height: 90vh;
+    width: 30vw;
+    right: 0;
+    background-color: white;
+    border-radius: 10px;
+    padding-inline: 20px;
+}
+
+.chatContainer {
+    position: relative;
+    height: 100%;
+}
+
+.chattingArea {
+    position: absolute;
+    bottom: 0;
+    padding-bottom: 1rem;
 }
