@@ -11,6 +11,7 @@ import ScreenShareIcon from '@mui/icons-material/ScreenShare';
 import StopScreenShareIcon from '@mui/icons-material/StopScreenShare';
 import ChatIcon from '@mui/icons-material/Chat';
 import styles from "../styles/videoComponent.module.css";
+import { useNavigate } from 'react-router-dom';
 
 const server_url = "http://localhost:8000";
 
@@ -380,6 +381,8 @@ export default function VideoMeetComponent() {
         return Object.assign(stream.getVideoTracks()[0], { enabled: false })
     }
 
+    let routeTo = useNavigate();
+
     let handleVideo = () => {
         setVideo(!video);
         // getUserMedia();
@@ -404,7 +407,8 @@ export default function VideoMeetComponent() {
             let tracks = localVideoref.current.srcObject.getTracks()
             tracks.forEach(track => track.stop())
         } catch (e) { }
-        window.location.href = "/"
+        
+        routeTo("/home")
     }
 
     let handleMessage = (e) => {
@@ -430,6 +434,7 @@ export default function VideoMeetComponent() {
 
         // this.setState({ message: "", sender: username })
     }
+
 
 
     let connect = () => {

@@ -9,7 +9,7 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Snackbar from '@mui/material/Snackbar';
-import { AuthContext, AuthProvider } from '../contexts/AuthContext';
+import { AuthContext } from '../contexts/AuthContext';
 
 const defaultTheme = createTheme();
 
@@ -30,7 +30,7 @@ export default function Authentication() {
   let handleAuth = async () => {
     try {
       if (formState === 0) {
-        let result =  await handleLogin(username, password)
+        let result = await handleLogin(username, password)
       }
       if (formState === 1) {
         let result = await handleRegister(name, username, password);
@@ -64,7 +64,8 @@ export default function Authentication() {
             minHeight: '100vh',
             backgroundImage: 'url(https://picsum.photos/1920/1080)',
             backgroundRepeat: 'no-repeat',
-            backgroundColor: '#f0f0f0',
+            backgroundColor: (t) =>
+              t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
@@ -127,7 +128,7 @@ export default function Authentication() {
                 onChange={(e) => setPassword(e.target.value)}
               />
 
-                <p style={{color: "red"}}>{error}</p>
+              <p style={{ color: "red" }}>{error}</p>
 
               <Button
                 type="button"
@@ -143,9 +144,9 @@ export default function Authentication() {
         </Grid>
       </Grid>
       <Snackbar
-      open={open}
-      autoHideDuration={4000}
-      message={message}
+        open={open}
+        autoHideDuration={4000}
+        message={message}
       />
     </ThemeProvider>
   );

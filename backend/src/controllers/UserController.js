@@ -1,7 +1,8 @@
 import httpStatus from "http-status";
 import { User } from "../models/UserModel.js";
-import bcrypt, { hash } from "bcrypt";
+import bcrypt from "bcrypt";
 import crypto from "crypto";
+import { Meeting } from "../models/MeetingModel.js";
 
 
 const login = async (req, res) => {
@@ -27,7 +28,7 @@ const login = async (req, res) => {
             await user.save();
             return res.status(httpStatus.OK).json({ token: token });
         } else {
-            return res.status(httpStatus.UNAUTHORIZED).json({message: "Invalid Username Password"});
+            return res.status(httpStatus.UNAUTHORIZED).json({ message: "Invalid Username Password" });
         }
 
     } catch (e) {
@@ -61,5 +62,45 @@ const register = async (req, res) => {
     }
 }
 
+const getUserHistory = async (req, res) => {
+    const { token } = req.body;
 
-export { login, register };
+    try {
+        const user = await User.findOne({ token: token });
+
+        if (!user) {
+            return res.status(httpStatus.UNAUTHORIZED).json({ message: "Invalid or expired token" });
+        }
+
+        const meetings = await Meeting.find({ user_id: user.username });
+        res.json(meetings);
+    } catch (e) {
+        res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ message: `Something went wrong ${e}` });
+    }
+}
+
+const addToHistory = async (req, res) => {
+    const { token, meeting_code } = req.body;
+
+    try {
+        const user = await User.findOne({ token: token });
+
+        if (!user) {
+            return res.status(httpStatus.UNAUTHORIZED).json({ message: "Invalid or expired token" });
+        }
+
+        const newMeeting = await Meeting({
+            user_id: user.username,
+            meeting_code: meeting_code,
+        });
+
+        await newMeeting.save();
+
+        res.status(httpStatus.CREATED).json({ message: "Added code to history" });
+    } catch (e) {
+        res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ message: `Something went wrong ${e}` });
+    }
+}
+
+
+export { login, register, getUserHistory, addToHistory };
