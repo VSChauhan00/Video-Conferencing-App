@@ -30,7 +30,7 @@ export default function LandingPage() {
 
             <div className="landingMainContainer">
                 <div>
-                    <h1><span style={{color: "orange"}}>Connect </span>with your loved Ones</h1>
+                    <h1><span style={{color: "rgb(248, 73, 158)"}}>Connect </span>with your loved Ones</h1>
 
                     <p>Cover the distance by Connecto</p>
 
@@ -39,7 +39,7 @@ export default function LandingPage() {
                     </div>
                 </div>
                 <div>
-                    <img src="/mobile.png" alt="" />
+                    <img src="/VideoCall.svg" alt="" />
                 </div>
             </div>
         </div>
