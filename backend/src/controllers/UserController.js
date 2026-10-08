@@ -63,9 +63,9 @@ const register = async (req, res) => {
 }
 
 const getUserHistory = async (req, res) => {
-    const { token } = req.body;
-
     try {
+        const { token } = req.query;
+
         const user = await User.findOne({ token: token });
 
         if (!user) {

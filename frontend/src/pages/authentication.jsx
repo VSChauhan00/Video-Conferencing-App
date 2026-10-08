@@ -62,15 +62,15 @@ export default function Authentication() {
           style={{
             height: '100%',
             minHeight: '100vh',
+            flex: '0 0 58.33%',
             backgroundImage: 'url(https://picsum.photos/1920/1080)',
             backgroundRepeat: 'no-repeat',
-            backgroundColor: (t) =>
-              t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
+            backgroundColor: '#f9fafb',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
         />
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square style={{ flex: '1 1 auto' }}>
           <Box
             sx={{
               my: 8,
